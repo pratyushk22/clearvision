@@ -5,21 +5,21 @@ import torch
 from models.model_loader import load_model, restore_image
 from utils.image_utils import preprocess_image, postprocess_tensor
 
-
-st.title("🧼 ClearVision - Image Restoration")
-
+st.title(" ClearVision - Image Restoration")
 
 uploaded_file = st.file_uploader("Upload a degraded image", type=["png", "jpg", "jpeg"])
 
 if uploaded_file:
- 
+    os.makedirs("uploads", exist_ok=True)
+    os.makedirs("outputs", exist_ok=True)
+
     input_path = os.path.join("uploads", uploaded_file.name)
     with open(input_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
 
     st.image(input_path, caption="Uploaded Image", use_column_width=True)
 
-    # Load model( plug here )
+
     model = load_model()
 
 
